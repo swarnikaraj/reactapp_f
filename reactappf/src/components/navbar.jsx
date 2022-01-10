@@ -4,6 +4,8 @@ import logo1 from "../logo1.png"
 
 import cart1 from "../cart.png"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/authContext";
 
 
 const Navbar=styled.div`
@@ -45,6 +47,7 @@ cursor:pointer;
 
 export const Nav=()=>{
     const style={textDecoration:'none',color:"#ECDBBA"}
+    const {token} = useContext(AuthContext)
     return <Navbar>
         <div> <img src={logo1}  alt="logo"/></div>
         <div>
@@ -62,7 +65,7 @@ export const Nav=()=>{
         </div>
 
         <div><Link to={"/cart"} style={style}><img src={cart1} style={{height:60}} alt="cart"/></Link>
-        <div><Link to={"/login"} style={style}><Button>Login</Button></Link></div>
+        <div><Link to={"/login"} style={style}><Button>{token? "logout":"login"}</Button></Link></div>
         
         </div>
     </Navbar>

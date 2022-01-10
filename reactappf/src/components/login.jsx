@@ -53,16 +53,17 @@ export const Login=()=>{
    return <Logindiv>
        <div>
         <input type="text" onChange={handleChange} placeholder="Enter email" name="email"/><br/>
-        <input type="text" onChange={handleChange} placeholder="Enter Your Password" name="passowrd"/><br/>
+        <input type="text" onChange={handleChange} placeholder="Enter Your Password" name="password"/><br/>
         <Bluebtn onClick={()=>{
             try{
                 fetch("https://reqres.in/api/login",{
-                    method:"POST",body:JSON.stringify(form),
-                }).then(res=>console.log(res.json()))
-        //         handletoken('123453')
-        //    navigate(-1)
+                    method:"POST",body:JSON.stringify(form), 
+                    headers:{"Content-Type":"application/json"}
+                    ,
+                }).then(res=>res.json()).then(res=>handletoken(res.token))
+             navigate(-1)
             }
-             catch{}
+             catch(e){console.log(e)}
         }}>Login</Bluebtn>
         </div>
 
